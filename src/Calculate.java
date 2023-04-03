@@ -1,11 +1,11 @@
 import java.util.Scanner;
 
-public class Calculate {
+class DepositCalculator {
     public static void main(String[] args) {
-        new Calculate().menu();
+       menu();
     }
 
-    void menu() {
+    static void menu() {
         int amount;
         int period;
         int action;
@@ -20,30 +20,29 @@ public class Calculate {
         System.out.println("Выберите тип вклада, 1 - вклад с обычным процентом, 2 - вклад с капитализацией: ");
         action = scanner.nextInt();
 
-        double outVar;
+        double out;
 
-        outVar = 0;
+        out = 0;
         if (action == 1) {
-            outVar = simplePercentFunction(amount, 0.06, period);
+            out = simplePercent(amount, 0.06, period);
         } else if (action == 2) {
-            outVar = complexPercentFunction(amount, 0.06, period);
-        } else {
-            System.out.println("Результат вклада: " + amount + " за " + period + " лет превратятся в " + outVar);
+            out = complexPercent(amount, 0.06, period);
         }
+        System.out.println("Результат вклада: " + amount + " за " + period + " лет превратятся в " + out);
     }
 
-    double complexPercentFunction(double a, double y, int d) {
+    static double complexPercent(double a, double y, int d) {
         double pay;
 
         pay = a * Math.pow((1 + y / 12), 12 * d);
         return rnd(pay, 2);
     }
 
-    double simplePercentFunction(double amount, double yearRate, int depositPeriod) {
+    static double simplePercent(double amount, double yearRate, int depositPeriod) {
         return rnd(amount + amount * yearRate * depositPeriod, 2);
     }
 
-    double rnd(double value, int places) {
+    static double rnd(double value, int places) {
         double scaLe;
         
         scaLe = Math.pow(10, places);
